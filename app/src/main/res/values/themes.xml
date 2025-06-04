@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BasicWear" parent="@android:style/Theme.DeviceDefault">
+        <item name="android:windowSwipeToDismiss">true</item>
+    </style>
+
+    <style name="LWear" parent="BasicWear">
+
+    </style>
+</resources>
