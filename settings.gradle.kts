@@ -20,5 +20,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "MiHome"
-include(":app")
+include(":wear")
  
