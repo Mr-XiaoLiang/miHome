@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "MiHome"
 include(":wear")
- 
+include(":miot")
+include(":http")
