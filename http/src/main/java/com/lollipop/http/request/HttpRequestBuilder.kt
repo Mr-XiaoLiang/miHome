@@ -1,8 +1,7 @@
-package com.lollipop.http
+package com.lollipop.http.request
 
 import okhttp3.HttpUrl
 import okhttp3.Request
-import okhttp3.RequestBody
 
 @DslMarker
 @Target(AnnotationTarget.CLASS, AnnotationTarget.TYPE)
