@@ -9,6 +9,13 @@ import com.lollipop.http.safe.SafeResult
 
 class MiAuthApi {
 
+    /**
+     * - client_id	long	申请应用时分配的应用 ID，可以在应用详情页获取
+     * - redirect_uri	string	回调地址, 必须和申请应用是填写的一致(参数部分可不一致)
+     * - client_secret	string	申请应用时分配的 AppSecret
+     * - grant_type	string	这里 grant_type=authorization_code
+     * - code	string	第1小节中拿到的授权码，有效期为 10 分钟且只能使用一次
+     */
     fun accessToken(
         clientId: String,
         clientSecret: String,
@@ -18,12 +25,6 @@ class MiAuthApi {
     ) {
         HTTP.with("https://account.xiaomi.com/oauth2/token") {
             PostForm {
-                //client_id	是	long	申请应用时分配的应用 ID，可以在应用详情页获取
-                //redirect_uri	是	string	回调地址, 必须和申请应用是填写的一致(参数部分可不一致)
-                //client_secret	是	string	申请应用时分配的 AppSecret
-                //grant_type	是	string	这里 grant_type=authorization_code
-                //code	是	string	第1小节中拿到的授权码，有效期为 10 分钟且只能使用一次
-
                 "client_id" to clientId
                 "redirect_uri" to redirectUri
                 "client_secret" to clientSecret
@@ -34,8 +35,6 @@ class MiAuthApi {
             callback(result.json<MiAuthTokenInfo>())
         }
     }
-
-
 }
 
 /**
