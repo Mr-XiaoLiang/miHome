@@ -1,8 +1,6 @@
 package com.lollipop.http.request
 
 import okhttp3.FormBody
-import org.json.JSONArray
-import org.json.JSONObject
 
 abstract class KeyValueDelegate {
 
