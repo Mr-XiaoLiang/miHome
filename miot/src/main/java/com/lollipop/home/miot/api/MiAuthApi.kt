@@ -10,11 +10,11 @@ import com.lollipop.http.safe.SafeResult
 class MiAuthApi {
 
     /**
-     * - client_id	long	申请应用时分配的应用 ID，可以在应用详情页获取
-     * - redirect_uri	string	回调地址, 必须和申请应用是填写的一致(参数部分可不一致)
-     * - client_secret	string	申请应用时分配的 AppSecret
-     * - grant_type	string	这里 grant_type=authorization_code
-     * - code	string	第1小节中拿到的授权码，有效期为 10 分钟且只能使用一次
+     * - client_id long 申请应用时分配的应用 ID，可以在应用详情页获取
+     * - redirect_uri string 回调地址, 必须和申请应用是填写的一致(参数部分可不一致)
+     * - client_secret string 申请应用时分配的 AppSecret
+     * - grant_type string 这里 grant_type=authorization_code
+     * - code string 第1小节中拿到的授权码，有效期为 10 分钟且只能使用一次
      */
     fun accessToken(
         clientId: String,
@@ -35,6 +35,34 @@ class MiAuthApi {
             callback(result.json<MiAuthTokenInfo>())
         }
     }
+
+    /**
+     * - client_id long 申请应用时分配的应用 ID，可以在应用详情页获取
+     * - redirect_uri string 回调地址, 必须和申请应用是填写的一致(参数部分可不一致)
+     * - client_secret string 申请应用时分配的 AppSecret，需要 URLEncode
+     * - grant_type string 这里 grant_type=refresh_token
+     * - refresh_token string 授权码模式下发访问令牌时下发的刷新令牌，只可使用一次
+     */
+    fun refreshToken(
+        clientId: String,
+        clientSecret: String,
+        refreshToken: String,
+        redirectUri: String,
+        callback: (SafeResult<MiAuthTokenInfo>) -> Unit
+    ) {
+        HTTP.with("https://account.xiaomi.com/oauth2/token") {
+            PostForm {
+                "client_id" to clientId
+                "redirect_uri" to redirectUri
+                "client_secret" to clientSecret
+                "grant_type" to "refresh_token"
+                "refresh_token" to refreshToken
+            }
+        }.call { result ->
+            callback(result.json<MiAuthTokenInfo>())
+        }
+    }
+
 }
 
 /**
